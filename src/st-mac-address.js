@@ -14,7 +14,22 @@ import { NotImplementedError } from '../extensions/index.js';
  * For 00-1B-63-84-45-E6, the output should be true.
  *
  */
-export default function isMAC48Address(/* n */) {
-  throw new NotImplementedError('Not implemented');
-  // remove line with error and write your code here
+export default function isMAC48Address(adr) {
+  let res = true
+  if (typeof adr === "string" || adr instanceof String) {
+    adr = (adr.split("-"))
+    if (adr.length === 6) {
+      adr.forEach((el) => {
+        if (el.length === 2) {
+          let k = parseInt(el, 16).toString(10);
+          if (k < 0 || k > 255 || isNaN(k) === true)  {
+            console.log(k);
+            res = false
+          }
+          console.log(k);
+        } else res = false
+      })
+    } else res = false
+  } else res = false
+  return res
 }
